@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import ru.zavanton.epoxy.R
 import ru.zavanton.epoxy.app.App
 import ru.zavanton.epoxy.domain.Student
+import ru.zavanton.epoxy.ui.epoxy.StudentEpoxyController
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var presenter: MainPresenter
+
+    private val studentEpoxyController = StudentEpoxyController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         presenter.view = this
 
         rvStudents.layoutManager = LinearLayoutManager(this)
-        rvStudents.adapter = StudentAdapter()
+        rvStudents.adapter = studentEpoxyController.adapter
 
         loadStudents()
     }
@@ -31,7 +34,8 @@ class MainActivity : AppCompatActivity() {
     fun showStudents(students: List<Student>) {
         Timber.d("zavanton - students: $students")
 
-        (rvStudents.adapter as StudentAdapter).updateStudents(students)
+        studentEpoxyController.updateStudents(students)
+        studentEpoxyController.requestModelBuild()
     }
 
     private fun inject() {
