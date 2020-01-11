@@ -12,6 +12,7 @@ class MainPresenter @Inject constructor(
 ) {
 
     private val disposables = CompositeDisposable()
+    var view: MainActivity? = null
 
     fun loadStudents() {
 
@@ -19,7 +20,7 @@ class MainPresenter @Inject constructor(
 
         disposables.add(data.subscribe(
             {
-                Timber.d("zavanton - students: $it")
+                view?.showStudents(it)
             },
             {
                 Timber.e("Failed to get students")
