@@ -2,8 +2,11 @@ package ru.zavanton.epoxy.domain
 
 import io.reactivex.Single
 import ru.zavanton.epoxy.data.StudentRepository
+import ru.zavanton.epoxy.di.ActivityScope
+import javax.inject.Inject
 
-class StudentInteractor constructor(
+@ActivityScope
+class StudentInteractor @Inject constructor(
     private val studentRepository: StudentRepository
 ) {
 

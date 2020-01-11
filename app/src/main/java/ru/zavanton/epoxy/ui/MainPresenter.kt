@@ -1,10 +1,13 @@
 package ru.zavanton.epoxy.ui
 
 import io.reactivex.disposables.CompositeDisposable
+import ru.zavanton.epoxy.di.ActivityScope
 import ru.zavanton.epoxy.domain.StudentInteractor
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainPresenter constructor(
+@ActivityScope
+class MainPresenter @Inject constructor(
     private val studentInteractor: StudentInteractor
 ) {
 

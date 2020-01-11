@@ -1,9 +1,12 @@
 package ru.zavanton.epoxy.data
 
 import io.reactivex.Single
+import ru.zavanton.epoxy.di.ActivityScope
 import ru.zavanton.epoxy.domain.Student
+import javax.inject.Inject
 
-class StudentRepository {
+@ActivityScope
+class StudentRepository @Inject constructor() {
 
     fun getStudents(): Single<List<Student>> =
         Single.just(
