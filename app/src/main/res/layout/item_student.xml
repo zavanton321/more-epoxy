@@ -5,19 +5,10 @@
     <data>
 
         <variable
-            name="firstName"
-            type="String"
+            name="student"
+            type="ru.zavanton.epoxy.domain.Student"
             />
 
-        <variable
-            name="lastName"
-            type="String"
-            />
-
-        <variable
-            name="age"
-            type="Integer"
-            />
     </data>
 
     <LinearLayout
@@ -32,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="@{firstName}"
+            android:text="@{student.firstName}"
             />
 
         <TextView
@@ -40,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="@{lastName}"
+            android:text="@{student.lastName}"
             />
 
         <TextView
@@ -48,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="@{age.toString()}"
+            android:text="@{Integer.toString(student.age)}"
             />
 
     </LinearLayout>

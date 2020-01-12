@@ -12,9 +12,7 @@ class StudentEpoxyController : EpoxyController() {
         students.forEachIndexed { index, student ->
             ItemStudentBindingModel_()
                 .id(index)
-                .firstName(student.firstName)
-                .lastName(student.lastName)
-                .age(student.age)
+                .student(student)
                 .addTo(this)
         }
     }
