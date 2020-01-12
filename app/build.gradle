@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -22,6 +26,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding.enabled = true
 }
 
 dependencies {
@@ -61,4 +67,10 @@ dependencies {
 
     // Logger
     implementation 'com.orhanobut:logger:2.2.0'
+
+    // Epoxy
+    def epoxy_version = "3.8.0"
+    implementation "com.airbnb.android:epoxy:${epoxy_version}"
+    implementation "com.airbnb.android:epoxy-databinding:${epoxy_version}"
+    kapt "com.airbnb.android:epoxy-processor:${epoxy_version}"
 }

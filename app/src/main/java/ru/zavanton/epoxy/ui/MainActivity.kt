@@ -2,11 +2,13 @@ package ru.zavanton.epoxy.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
 import ru.zavanton.epoxy.R
 import ru.zavanton.epoxy.app.App
+import ru.zavanton.epoxy.databinding.ActivityMainBinding
 import ru.zavanton.epoxy.domain.Student
+import ru.zavanton.epoxy.ui.epoxy.StudentEpoxyController
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,15 +17,19 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var presenter: MainPresenter
 
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var studentEpoxyController: StudentEpoxyController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         presenter.view = this
 
-        rvStudents.layoutManager = LinearLayoutManager(this)
-        rvStudents.adapter = StudentAdapter()
+        studentEpoxyController = StudentEpoxyController()
+        binding.rvStudents.layoutManager = LinearLayoutManager(this)
+        binding.rvStudents.adapter = studentEpoxyController.adapter
 
         loadStudents()
     }
@@ -31,7 +37,8 @@ class MainActivity : AppCompatActivity() {
     fun showStudents(students: List<Student>) {
         Timber.d("zavanton - students: $students")
 
-        (rvStudents.adapter as StudentAdapter).updateStudents(students)
+        studentEpoxyController.updateStudents(students)
+        studentEpoxyController.requestModelBuild()
     }
 
     private fun inject() {
