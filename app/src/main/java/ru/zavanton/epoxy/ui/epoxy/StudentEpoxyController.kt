@@ -1,13 +1,11 @@
 package ru.zavanton.epoxy.ui.epoxy
 
-import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.TypedEpoxyController
 import ru.zavanton.epoxy.domain.Student
 
-class StudentEpoxyController : EpoxyController() {
+class StudentEpoxyController : TypedEpoxyController<List<Student>>() {
 
-    private val students: MutableList<Student> = mutableListOf()
-
-    override fun buildModels() {
+    override fun buildModels(students: List<Student>) {
         students.forEachIndexed { index, student ->
             StudentEpoxyModel_()
                 .id(index)
@@ -16,10 +14,5 @@ class StudentEpoxyController : EpoxyController() {
                 .age(student.age)
                 .addTo(this)
         }
-    }
-
-    fun updateStudents(data: List<Student>) {
-        students.clear()
-        students.addAll(data)
     }
 }

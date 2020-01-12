@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
     fun showStudents(students: List<Student>) {
         Timber.d("zavanton - students: $students")
 
-        studentEpoxyController.updateStudents(students)
-        studentEpoxyController.requestModelBuild()
+        studentEpoxyController.setData(students)
     }
 
     private fun inject() {
